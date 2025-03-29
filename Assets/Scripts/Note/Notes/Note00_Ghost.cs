@@ -19,7 +19,18 @@ public class Note00_Ghost : NoteBase
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
-    // dissolve shading
+    public override void Attack()
+    {
+        base.Attack();
+        Dissolve();
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        Dissolve();
+    }
+
     void Dissolve()
     {
         dissolveValue -= Time.deltaTime;

@@ -1,10 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Test_EventTrigger : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public string side = "Right";
-
     public float swipeThreshold = 1.0f;
 
     Vector2 touchStartPos;
@@ -12,6 +11,8 @@ public class Test_EventTrigger : MonoBehaviour, IDragHandler, IPointerDownHandle
     Vector2 dir;
 
     bool isSwipeDetected = false; // 스와이프 감지 여부를 추적
+
+    public Action<int> onSwipe;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -44,7 +45,7 @@ public class Test_EventTrigger : MonoBehaviour, IDragHandler, IPointerDownHandle
         Debug.Log("드래그 종료");
     }
 
-    // 수직 스와이프 방향 감지 (위/아래만 감지)
+    // 수직 스와이프 방향 감지
     void DetectSwipe()
     {
         if (dir.y > 0)
@@ -61,13 +62,11 @@ public class Test_EventTrigger : MonoBehaviour, IDragHandler, IPointerDownHandle
 
     void SwipeUp()
     {
-        Debug.Log($"{side} : Swipe Up");
         // 위쪽 스와이프 시 실행할 기능을 여기에 추가
     }
 
     void SwipeDown()
     {
-        Debug.Log($"{side} : Swipe Down");
         // 아래쪽 스와이프 시 실행할 기능을 여기에 추가
     }
 }

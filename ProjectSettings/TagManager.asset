@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Note
   - FxTemporaire
+  - HitZone
   layers:
   - Default
   - TransparentFX
