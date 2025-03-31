@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class NoteBase : RecycleObject
@@ -7,11 +8,26 @@ public class NoteBase : RecycleObject
     protected Animator animator;
     protected NoteGuideLine guide;
 
+    bool isHit = false;
+
     protected readonly int Attack_Hash = Animator.StringToHash("Attack");
     protected readonly int Die_Hash = Animator.StringToHash("Die");
 
-    public bool IsHit { get; set; }
+    public bool IsHit 
+    { 
+        get => isHit; 
+        set 
+        { 
+            if (isHit != value)
+            {
+                isHit = value;
+                onHit?.Invoke();
+            }
+        } 
+    }
     public NoteGuideLine Guide => guide;
+
+    public Action onHit;
 
     protected virtual void Awake()
     {
@@ -27,7 +43,7 @@ public class NoteBase : RecycleObject
     }
     protected override void OnReset()
     {
-        IsHit = false;
+        isHit = false;
         DisableTimer(20.0f);
     }
 

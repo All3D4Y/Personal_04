@@ -31,7 +31,7 @@ public class NotePoolManager : MonoBehaviour
                 Type noteType = pool.GetNoteType();
                 if (noteType != null)
                 {
-                    notePools.Add(pool.GetNoteType(), pool);
+                    notePools.Add(noteType, pool);
                 }
             }
         }

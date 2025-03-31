@@ -34,9 +34,9 @@ public class HitZone : MonoBehaviour
         }
     }
 
-    void HitNote(int hitZoneIndex)
+    void HitNote(int laneIndex)
     {
-        switch (hitZoneIndex)
+        switch (laneIndex)
         {
             case 0:
                 // right up
