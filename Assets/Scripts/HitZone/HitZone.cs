@@ -5,66 +5,22 @@ using UnityEngine;
 
 public class HitZone : MonoBehaviour
 {
-    List<NoteBase> notes;
-
     public Action<HitEnum> onHit;
 
-    void Awake()
+    public void HitNote(int index)
     {
-        notes = new List<NoteBase>();
-    }
+        LaneManager manager = GameManager.Instance.NoteManager.LaneManager;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Note"))
-            notes.Add(other.GetComponent<NoteBase>());
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Note"))
+        List<NoteBase> list = manager[index].OnLaneNotes;
+        if (list.Count > 0)
         {
-            NoteBase temp = other.GetComponent<NoteBase>();
-            if (!temp.IsHit)
+            NoteBase note = list[0];
+            if (note != null && note.transform.position.z < 2)
             {
-                notes.Remove(temp);
-                onHit?.Invoke(HitEnum.Miss);
-                Debug.Log("Miss");
+                float distance = Mathf.Abs(note.transform.position.z - 1);
+                onHit?.Invoke(CheckTimin(distance));
+                note.IsHit = true;
             }
-        }
-    }
-
-    void HitNote(int laneIndex)
-    {
-        switch (laneIndex)
-        {
-            case 0:
-                // right up
-                break;
-            case 1:
-                // right down
-                break;
-            case 2:
-                // right toggle
-                break;
-            case 3:
-                // left up
-                break;
-            case 4:
-                // left down
-                break;
-            case 5:
-                // left toggle
-                break;
-            case 6:
-                // both up
-                break;
-            case 7:
-                // both down
-                break;
-            case 8:
-                // both toggle
-                break;
         }
     }
 
@@ -76,7 +32,7 @@ public class HitZone : MonoBehaviour
         else if (distance <= 0.65f)
             hit = HitEnum.Good;
         else
-            hit = HitEnum.Miss;
+            hit = HitEnum.Bad;
         return hit;
     }
 }

@@ -30,6 +30,8 @@ public class NoteGuideLine : MonoBehaviour
     {
         if (!note.IsHit)
             DrawLine();
+        if (transform.position.z < 0.9f)
+            EraseLine();
     }
 
     void InitializeLine()

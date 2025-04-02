@@ -37,9 +37,10 @@ public class NoteBase : RecycleObject
 
     protected virtual void Update()
     {
-        transform.Translate(noteSpeed * Time.deltaTime * Vector3.forward);
-        if (transform.position.z < 0.8f)
+        if (transform.position.z <= 0.0f)
             Attack();
+        else
+            transform.Translate(noteSpeed * Time.deltaTime * Vector3.forward);
     }
     protected override void OnReset()
     {
@@ -50,72 +51,12 @@ public class NoteBase : RecycleObject
     public virtual void Attack()
     {
         animator.SetTrigger(Attack_Hash);
+        IsHit = true;
     }
 
     public virtual void Die()
     {
         animator.SetTrigger(Die_Hash);
         DisableTimer(0.1f);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("HitZone"))
-        {
-            float distance = collision.transform.position.z - transform.position.z;
-            distance = Mathf.Abs(distance);
-
-            if (distance <= 0.2)
-            {
-                // perfect
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Perfect);
-                Debug.Log("Perfect");
-            }
-            else if (distance <= 0.5)
-            {
-                // good
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Good);
-                Debug.Log("Good");
-            }
-            else
-            {
-                // bad
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Bad);
-                Debug.Log("Bad");
-            }
-
-            IsHit = true;
-            guide.EraseLine();
-            Die();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("HitZone"))
-        {
-            float distance = other.transform.position.z - transform.position.z;
-            distance = Mathf.Abs(distance);
-
-            if (distance <= 0.2)
-            {
-                // perfect
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Perfect);
-            }
-            else if (distance <= 0.5)
-            {
-                // good
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Good);
-            }
-            else
-            {
-                // bad
-                GameManager.Instance.HitZone.onHit?.Invoke(HitEnum.Bad);
-            }
-
-            IsHit = true;
-            guide.EraseLine();
-            Die();
-        }
     }
 }

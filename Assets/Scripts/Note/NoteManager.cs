@@ -5,40 +5,35 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour 
 {
+    AudioSource audioSource;
     MusicData currentMusicData;
+    LaneManager laneManager;
 
     NoteData[] noteDatas;
 
-    Transform[] laneTransforms;
-
-    AudioSource audioSource;
-
-    List<NoteBase> activeNotes;
-
     int currentIndex = 0;
-
     float currentTime;
+    float realTimeRatio;
 
-    public List<NoteBase> ActiveNotes;
+    public LaneManager LaneManager => laneManager;
 
     void Awake()
     {
-        laneTransforms = new Transform[transform.childCount];
-        for (int i = 0; i < laneTransforms.Length; i++)
-        {
-            laneTransforms[i] = transform.GetChild(i);
-        }
         audioSource = GetComponent<AudioSource>();
+        laneManager = new LaneManager(6);
     }
 
     void FixedUpdate()
     {
         currentTime = audioSource.time;
 
-        while (currentIndex < noteDatas.Length && noteDatas[currentIndex].time <= currentTime)
+        if (audioSource.isPlaying)
         {
-            SpawnNote(noteDatas[currentIndex]);
-            currentIndex++;
+            if (currentIndex < noteDatas.Length && (noteDatas[currentIndex].bar * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
+            {
+                SpawnNote(noteDatas[currentIndex]);
+                currentIndex++; 
+            }
         }
     }
 
@@ -46,25 +41,43 @@ public class NoteManager : MonoBehaviour
     {
         currentMusicData = musicData;
         noteDatas = musicData.notes;
-        activeNotes = new List<NoteBase>();
-        audioSource.resource = musicData.music;
+        audioSource.resource = musicData.audioClip;
+        realTimeRatio = MathF.Round(240.0f / musicData.bpm, 6);
     }
 
     public void SpawnNote(NoteData noteData)
     {
-        Transform spawnPos = laneTransforms[(int)noteData.lane];
+        int noteSide = (int)noteData.side;
         NoteBase note = null;
 
-        if (noteData.type == NoteType.Note00_Ghost)
-            note = Factory.Instance.GetNote<Note00_Ghost>(spawnPos.position);
-        else if (noteData.type == NoteType.Note01_Slime)
-            note = Factory.Instance.GetNote<Note01_Slime>(spawnPos.position);
-
-        if (note != null)
+        if (noteSide == 2)
         {
-            activeNotes.Add(note);
-            note.onHit = null;
-            note.onHit += () => activeNotes.Remove(note);
+            Transform[] spawnPositions = GetTransforms(noteData.height);
+            for (int i = 0; i < spawnPositions.Length; i++)
+            {
+                if (noteData.height == NoteHeight.Up)
+                {
+                    note = Factory.Instance.GetNote<Note00_Ghost>(spawnPositions[i].position);
+                }
+                else if (noteData.height == NoteHeight.Down)
+                {
+                    note = Factory.Instance.GetNote<Note01_Slime>(spawnPositions[i].position);
+                }
+                laneManager[i * 3 + (int)noteData.height].AddNote(note);
+            }
+        }
+        else
+        {
+            Transform spawnPosition = GetTransform(noteData.height, noteData.side);
+            if (noteData.height == NoteHeight.Up)
+            {
+                note = Factory.Instance.GetNote<Note00_Ghost>(spawnPosition.position);
+            }
+            else if (noteData.height == NoteHeight.Down)
+            {
+                note = Factory.Instance.GetNote<Note01_Slime>(spawnPosition.position);
+            }
+            laneManager[3 * (int)noteData.side + (int)noteData.height].AddNote(note);
         }
     }
 
@@ -74,4 +87,25 @@ public class NoteManager : MonoBehaviour
         currentTime = 0.0f;
         audioSource.Play();
     }
+
+    #region 노트 출현 위치를 리턴하는 함수
+    Transform GetTransform(NoteHeight height, NoteSide side)
+    {
+        Transform result = null;
+        if ((int)side != 2)
+            result = transform.GetChild((int)side).GetChild((int)height);
+        return result;
+    }
+
+    Transform[] GetTransforms(NoteHeight height)
+    {
+        Transform[] results = new Transform[2];
+        for (int i = 0; i < results.Length; i++)
+        {
+            results[i] = transform.GetChild(i).GetChild((int)height);
+        }
+
+        return results;
+    }
+    #endregion
 }

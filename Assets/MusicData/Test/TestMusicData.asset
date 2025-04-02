@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7194e76f39a5841b89f6f39b013b3e, type: 3}
+  m_Name: TestMusicData
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: bf9f5f8dc12a9de4db18d407724f3066, type: 3}
+  bpm: 150
+  syncModifier: 0.5
+  notes:
+  - height: 1
+    bar: 1
+    side: 2
+  - height: 0
+    bar: 1.5
+    side: 2
+  - height: 0
+    bar: 2
+    side: 0
+  - height: 1
+    bar: 2.5
+    side: 1
+  - height: 1
+    bar: 3
+    side: 0
+  - height: 0
+    bar: 3.5
+    side: 1
+  - height: 0
+    bar: 4
+    side: 0
+  - height: 1
+    bar: 4.5
+    side: 0
+  - height: 0
+    bar: 5
+    side: 0
+  - height: 0
+    bar: 5.5
+    side: 1
+  - height: 1
+    bar: 6
+    side: 0
+  - height: 0
+    bar: 6.5
+    side: 2
+  - height: 1
+    bar: 7
+    side: 1
+  - height: 1
+    bar: 7.5
+    side: 0
+  - height: 0
+    bar: 8
+    side: 1
+  - height: 1
+    bar: 8.5
+    side: 2

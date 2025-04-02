@@ -54,8 +54,10 @@ public class ObjectPool<T> : MonoBehaviour where T : RecycleObject
         }
         else
         {
-            ExpandPool();                           
-            return GetObject(position, eulerAngle);
+            //ExpandPool();                           
+            //return GetObject(position, eulerAngle);
+            Debug.LogWarning("ExpandPool 요청");
+            return null;
         }
 
     }
