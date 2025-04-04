@@ -20,6 +20,7 @@ public class HitZone : MonoBehaviour
                 float distance = Mathf.Abs(note.transform.position.z - 1);
                 onHit?.Invoke(CheckTimin(distance));
                 note.IsHit = true;
+                Debug.Log(CheckTimin(distance));
             }
         }
     }
@@ -34,5 +35,15 @@ public class HitZone : MonoBehaviour
         else
             hit = HitEnum.Bad;
         return hit;
+    }
+
+    public void ToggleStart(int index)
+    {
+
+    }
+
+    public void ToggleEnd(int index)
+    {
+
     }
 }
