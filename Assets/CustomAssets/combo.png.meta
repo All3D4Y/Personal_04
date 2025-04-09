@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2f9868bd84e98ac42b733dd9ab635e44
+guid: 08d92040133721c478bdf9cff417c9c6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: perfect
+      name: combo_text
       rect:
         serializedVersion: 2
-        x: 35
-        y: 778
-        width: 937
-        height: 183
+        x: 90
+        y: 774
+        width: 820
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,41 +151,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2150506c1037a554c9abd08e270030b3
-      internalID: -1555895899
+      spriteID: ef0b4232213fbf7489cbb7452b0d4aba
+      internalID: 218011262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: good
+      name: combo_0
       rect:
         serializedVersion: 2
-        x: 176
-        y: 538
-        width: 643
-        height: 184
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d877e122a711d1499cb93bf04be9ee4
-      internalID: -805779573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bad
-      rect:
-        serializedVersion: 2
-        x: 290
-        y: 302
-        width: 427
+        x: 208
+        y: 546
+        width: 152
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -195,19 +173,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a6fb05f11faba846ba2210124019b2f
-      internalID: 1450784269
+      spriteID: 4060d78256e1a9a499376b276736d2f5
+      internalID: 153321794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miss
+      name: combo_1
       rect:
         serializedVersion: 2
-        x: 269
-        y: 64
-        width: 472
+        x: 406
+        y: 545
+        width: 152
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -217,8 +195,184 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f1f0bcd086506b4488f1b1e2171665b
-      internalID: 316457410
+      spriteID: e8031384834e13e4aa4653bc510e6411
+      internalID: 86552697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_2
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 545
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92acebe7e843a6845a21020591d2de75
+      internalID: -77150165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_3
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 304
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6613fd89b79754bb94b497c338101f
+      internalID: -185570233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_4
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 304
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0797234fc33b55458ccd7947ed25031
+      internalID: 265987814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_5
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 304
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90025073b5c3200499949e9c26284e4e
+      internalID: -76430367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_6
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 68
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b02a2c857c4524c4d877c4a86f500cb6
+      internalID: -1578033129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_7
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 68
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c59b1a0f402a9e4986ac35c0c5ce291
+      internalID: -1784783561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_8
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 68
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4926300a971e58644bb80b28c6bfc472
+      internalID: -577950747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combo_9
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 68
+        width: 152
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 058a822b673c7884dbb06c5cc842fb84
+      internalID: 1806977403
       vertices: []
       indices: 
       edges: []
@@ -227,7 +381,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cf06c36e06aeb304ca70465f11d730e4
+    spriteID: 67eb544739f5ff74d9775bfae928af17
     internalID: 0
     vertices: []
     indices: 
@@ -237,10 +391,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bad: 1450784269
-      good: -805779573
-      miss: 316457410
-      perfect: -1555895899
+      combo_0: 153321794
+      combo_1: 86552697
+      combo_2: -77150165
+      combo_3: -185570233
+      combo_4: 265987814
+      combo_5: -76430367
+      combo_6: -1578033129
+      combo_7: -1784783561
+      combo_8: -577950747
+      combo_9: 1806977403
+      combo_text: 218011262
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -9,7 +9,7 @@ public class NoteManager : MonoBehaviour
     MusicData currentMusicData;
     LaneManager laneManager;
 
-    NoteData[] noteDatas;
+    List<NoteData> noteDatas;
 
     int currentIndex = 0;
     float currentTime;
@@ -29,7 +29,7 @@ public class NoteManager : MonoBehaviour
 
         if (audioSource.isPlaying)
         {
-            if (currentIndex < noteDatas.Length && (noteDatas[currentIndex].bar * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
+            if (currentIndex < noteDatas.Count && (noteDatas[currentIndex].barTime * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
             {
                 SpawnNote(noteDatas[currentIndex]);
                 currentIndex++; 

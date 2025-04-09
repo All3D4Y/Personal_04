@@ -14,53 +14,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: bf9f5f8dc12a9de4db18d407724f3066, type: 3}
   bpm: 150
-  syncModifier: 0.5
+  syncModifier: 0.2
   notes:
   - height: 1
-    bar: 1
-    side: 2
-  - height: 0
-    bar: 1.5
-    side: 2
-  - height: 0
-    bar: 2
+    barTime: 0
     side: 0
   - height: 1
-    bar: 2.5
-    side: 1
-  - height: 1
-    bar: 3
-    side: 0
-  - height: 0
-    bar: 3.5
+    barTime: 0
     side: 1
   - height: 0
-    bar: 4
-    side: 0
-  - height: 1
-    bar: 4.5
+    barTime: 1
     side: 0
   - height: 0
-    bar: 5
-    side: 0
-  - height: 0
-    bar: 5.5
+    barTime: 1
     side: 1
   - height: 1
-    bar: 6
+    barTime: 2
+    side: 0
+  - height: 1
+    barTime: 2
+    side: 1
+  - height: 0
+    barTime: 3
     side: 0
   - height: 0
-    bar: 6.5
-    side: 2
-  - height: 1
-    bar: 7
+    barTime: 3
     side: 1
   - height: 1
-    bar: 7.5
+    barTime: 4
+    side: 0
+  - height: 1
+    barTime: 4.5
+    side: 0
+  - height: 1
+    barTime: 5
+    side: 0
+  - height: 1
+    barTime: 5.5
+    side: 0
+  - height: 1
+    barTime: 6
+    side: 1
+  - height: 1
+    barTime: 6.5
+    side: 1
+  - height: 1
+    barTime: 7
+    side: 1
+  - height: 1
+    barTime: 7.5
+    side: 1
+  - height: 1
+    barTime: 8
     side: 0
   - height: 0
-    bar: 8
+    barTime: 8.5
     side: 1
   - height: 1
-    bar: 8.5
-    side: 2
+    barTime: 9
+    side: 1
+  - height: 0
+    barTime: 9.5
+    side: 0

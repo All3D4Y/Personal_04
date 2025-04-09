@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMusicData", menuName = "Scriptable Objects/MusicData")]
@@ -12,5 +13,5 @@ public class MusicData : ScriptableObject
     [Range(-10.0f, 10.0f)] public float syncModifier;
     [Space(2)]
     [Header("Note")]
-    public NoteData[] notes;
+    public List<NoteData> notes;
 }
