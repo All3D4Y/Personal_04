@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class JudgeUI : MonoBehaviour
 {
+    public AnimationCurve alphaCulve;
+
     Image[] images;
 
     void Awake()
