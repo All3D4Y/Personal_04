@@ -4,6 +4,7 @@ using UnityEngine;
 public class ComboManager
 {
     ScoreManager scoreManager = null;
+    HitZone hitZone = null;
 
     int currentCombo = 0;
     int maxCombo = 0;
@@ -28,19 +29,21 @@ public class ComboManager
         }
     }
 
-    public void Initialize()
+    public void Initialize(HitZone hitZone)
     {
+        this.hitZone = hitZone;
         currentCombo = 0;
         maxCombo = 0;
         scoreManager = new ScoreManager(this);
-        GameManager.Instance.HitZone.onHit += OnNoteHit;
+        hitZone.onHit += OnNoteHit;
     }
 
     public void CleanUp()
     {
         scoreManager.CleanUp();
         scoreManager = null;
-        GameManager.Instance.HitZone.onHit -= OnNoteHit;
+        hitZone.onHit -= OnNoteHit;
+        hitZone = null;
     }
 
     void OnNoteHit(HitEnum hit)

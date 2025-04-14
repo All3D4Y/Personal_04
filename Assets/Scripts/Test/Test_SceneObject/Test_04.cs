@@ -6,6 +6,7 @@ public class Test_04 : TestBase
     public MusicData musicData;
     public TouchPanel right;
     public TouchPanel left;
+    public int combo;
 
     void Start()
     {
@@ -15,6 +16,11 @@ public class Test_04 : TestBase
     protected override void OnTest1(InputAction.CallbackContext context)
     {
         GameManager.Instance.NoteManager.MusicStart();
+    }
+
+    protected override void OnTest2(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.NoteManager.ComboManager.onCombo?.Invoke(combo);
     }
 
     void Update()

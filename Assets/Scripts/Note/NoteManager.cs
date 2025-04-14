@@ -8,6 +8,7 @@ public class NoteManager : MonoBehaviour
     AudioSource audioSource;
     MusicData currentMusicData;
     LaneManager laneManager;
+    ComboManager comboManager;
 
     List<NoteData> noteDatas;
 
@@ -16,11 +17,15 @@ public class NoteManager : MonoBehaviour
     float realTimeRatio;
 
     public LaneManager LaneManager => laneManager;
+    public ComboManager ComboManager => comboManager;
 
     void Awake()
     {
+        HitZone hitZone = FindAnyObjectByType<HitZone>();
         audioSource = GetComponent<AudioSource>();
         laneManager = new LaneManager(6);
+        comboManager = new ComboManager();
+        comboManager.Initialize(hitZone);
     }
 
     void FixedUpdate()
@@ -35,6 +40,11 @@ public class NoteManager : MonoBehaviour
                 currentIndex++; 
             }
         }
+    }
+
+    void OnDisable()
+    {
+        comboManager.CleanUp();
     }
 
     public void Initialize(MusicData musicData)

@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    Canvas canvas;
     TouchPanel[] panels;
+    ComboUI comboUI;
 
     void Awake()
     {
-        panels = FindAnyObjectByType<Canvas>().GetComponentsInChildren<TouchPanel>();
+        canvas = FindAnyObjectByType<Canvas>();
+        panels = canvas.GetComponentsInChildren<TouchPanel>();
+        comboUI = canvas.GetComponentInChildren<ComboUI>();
     }
 
     void Start()
@@ -17,6 +21,7 @@ public class UIManager : MonoBehaviour
             panel.onHoldStart += HandleHoldStart;
             panel.onHoldEnd += HandleHoldEnd;
         }
+        GameManager.Instance.NoteManager.ComboManager.onCombo += comboUI.ShowCombo;
     }
 
     void OnDisable()
@@ -27,6 +32,7 @@ public class UIManager : MonoBehaviour
             panel.onHoldStart -= HandleHoldStart;
             panel.onHoldEnd -= HandleHoldEnd;
         }
+        GameManager.Instance.NoteManager.ComboManager.onCombo -= comboUI.ShowCombo;
     }
 
     void HandleSwipe(int actionCode)
