@@ -5,12 +5,14 @@ public class UIManager : MonoBehaviour
     Canvas canvas;
     TouchPanel[] panels;
     ComboUI comboUI;
+    ScoreUI scoreUI;
 
     void Awake()
     {
         canvas = FindAnyObjectByType<Canvas>();
         panels = canvas.GetComponentsInChildren<TouchPanel>();
         comboUI = canvas.GetComponentInChildren<ComboUI>();
+        scoreUI = canvas.GetComponentInChildren<ScoreUI>();
     }
 
     void Start()
