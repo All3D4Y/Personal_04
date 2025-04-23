@@ -2,53 +2,29 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    Canvas canvas;
-    TouchPanel[] panels;
-    ComboUI comboUI;
-    ScoreUI scoreUI;
+    static UIManager instance;
+
+    GameHUDViewModel gameHUDViewModel;
+
+    public static UIManager Instance => instance;
+    public GameHUDViewModel GameHUDViewModel => gameHUDViewModel;
 
     void Awake()
     {
-        canvas = FindAnyObjectByType<Canvas>();
-        panels = canvas.GetComponentsInChildren<TouchPanel>();
-        comboUI = canvas.GetComponentInChildren<ComboUI>();
-        scoreUI = canvas.GetComponentInChildren<ScoreUI>();
+        if (instance == null)
+            instance = this;
     }
 
-    void Start()
+    public void Initialize()
     {
-        foreach (var panel in panels)
-        {
-            panel.onSwipe += HandleSwipe;
-            panel.onHoldStart += HandleHoldStart;
-            panel.onHoldEnd += HandleHoldEnd;
-        }
-        GameManager.Instance.NoteManager.ComboManager.onCombo += comboUI.ShowCombo;
+        gameHUDViewModel = new GameHUDViewModel();
+        NoteManager.Instance.ComboManager.onCombo += gameHUDViewModel.ComboUpdate;
+        NoteManager.Instance.ComboManager.onScore += gameHUDViewModel.ScoreUpdate;
     }
 
-    void OnDisable()
+    public void CleanUp()
     {
-        foreach (var panel in panels)
-        {
-            panel.onSwipe -= HandleSwipe;
-            panel.onHoldStart -= HandleHoldStart;
-            panel.onHoldEnd -= HandleHoldEnd;
-        }
-        GameManager.Instance.NoteManager.ComboManager.onCombo -= comboUI.ShowCombo;
-    }
-
-    void HandleSwipe(int actionCode)
-    {
-        GameManager.Instance.HitZone.HitNote(actionCode);
-    }
-
-    void HandleHoldStart(int actionCode)
-    {
-        GameManager.Instance.HitZone.ToggleStart(actionCode);
-    }
-
-    void HandleHoldEnd(int actionCode)
-    {
-        GameManager.Instance.HitZone.ToggleEnd(actionCode);
+        NoteManager.Instance.ComboManager.onCombo -= gameHUDViewModel.ComboUpdate;
+        NoteManager.Instance.ComboManager.onScore -= gameHUDViewModel.ScoreUpdate;
     }
 }

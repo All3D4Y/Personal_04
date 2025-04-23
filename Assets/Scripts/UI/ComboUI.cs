@@ -21,6 +21,11 @@ public class ComboUI : MonoBehaviour
         comboTextImage.enabled = false;
     }
 
+    void Update()
+    {
+        ShowCombo(UIManager.Instance.GameHUDViewModel.Combo);
+    }
+
     public void ShowCombo(int comboCount)
     {
         if (comboCount <= 0)

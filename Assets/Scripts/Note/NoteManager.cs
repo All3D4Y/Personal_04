@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour 
 {
+    static NoteManager instance;
     AudioSource audioSource;
     MusicData currentMusicData;
     LaneManager laneManager;
@@ -16,29 +17,34 @@ public class NoteManager : MonoBehaviour
     float currentTime;
     float realTimeRatio;
 
+    public static NoteManager Instance => instance;
     public LaneManager LaneManager => laneManager;
     public ComboManager ComboManager => comboManager;
+    public ScoreManager ScoreManager => comboManager.ScoreManager;
 
     void Awake()
     {
-        HitZone hitZone = FindAnyObjectByType<HitZone>();
         audioSource = GetComponent<AudioSource>();
         laneManager = new LaneManager(6);
-        comboManager = new ComboManager();
-        comboManager.Initialize(hitZone);
+        
+        if (instance == null)
+            instance = this;
     }
 
     void FixedUpdate()
     {
-        currentTime = audioSource.time;
-
-        if (audioSource.isPlaying)
+        if (audioSource != null)
         {
-            if (currentIndex < noteDatas.Count && (noteDatas[currentIndex].barTime * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
+            currentTime = audioSource.time;
+
+            if (audioSource.isPlaying)
             {
-                SpawnNote(noteDatas[currentIndex]);
-                currentIndex++; 
-            }
+                if (currentIndex < noteDatas.Count && (noteDatas[currentIndex].barTime * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
+                {
+                    SpawnNote(noteDatas[currentIndex]);
+                    currentIndex++;
+                }
+            } 
         }
     }
 
@@ -49,6 +55,9 @@ public class NoteManager : MonoBehaviour
 
     public void Initialize(MusicData musicData)
     {
+        comboManager = new ComboManager();
+        comboManager.Initialize(HitZone.Instance);
+
         currentMusicData = musicData;
         noteDatas = musicData.notes;
         audioSource.resource = musicData.audioClip;

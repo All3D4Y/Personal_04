@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class HitZone : MonoBehaviour
 {
+    static HitZone instance;
+
     public Action<HitEnum> onHit;
+
+    public static HitZone Instance => instance;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     public void HitNote(int index)
     {

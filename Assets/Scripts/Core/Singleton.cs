@@ -3,28 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// 이 클래스는 제네릭 타입이다.
-// 이 클래스의 T타입은 component를 상속받은 타입만 가능하다.
 public class Singleton<T> : MonoBehaviour where T : Component
 {
-    /// <summary>
-    /// 이 싱글톤이 초기화 된적이 있는지를 기록하는 변수
-    /// </summary>
-    private bool isInitialize = false;
-
-    /// <summary>
-    /// 종료처리에 들어갔는지 확인용 변수(static 맴버 함수 안에서는 static 맴버 변수만 접근 가능)
-    /// </summary>
-    private static bool isShutdown = false;
-
-    /// <summary>
-    /// 이 싱글톤의 인스턴스(new 한것)
-    /// </summary>
-    private static T instance = null;
-
-    /// <summary>
-    /// 이 싱글톤에 접근하기 위한 프로퍼티
-    /// </summary>
+    bool isInitialize = false;
+    static bool isShutdown = false;
+    static T instance = null;
     public static T Instance
     {
         get
@@ -112,52 +95,5 @@ public class Singleton<T> : MonoBehaviour where T : Component
     private void OnApplicationQuit()
     {
         isShutdown = true;
-    }
-}
-
-
-// 싱글톤 : 생성되는 객체가 무조건 1개인 클래스
-public class TestSingleton
-{
-    private static TestSingleton instance = null;  // 공용으로 사용되는 곳에 인스턴스의 참조를 저장
-
-    public static TestSingleton Instance
-    {
-        get
-        {
-            if(instance == null)    // 이전에 인스턴스가 만들어진 적이 없으면
-            {
-                instance = new TestSingleton(); // 인스턴스 생성
-            }
-            return instance;        // 있던 것이나 새로 만들어진 것을 리턴
-        }
-    }
-
-    private TestSingleton()  // 모든 생성자는 public이 아니어야 한다.
-    {
-    }
-}
-
-public class TestClass
-{
-    // 스태틱 맴버 변수는 모든 객체에서 공용으로 사용된다.
-    public static int staticNumber = 0;
-
-    // 생성자 : 객체가 생성될 때(new 될때) 실행되는 코드
-    // 생성자는 여러개를 만들수 있다.(파라메터는 달라야함)
-    // 생성자를 하나도 작성하지 않으면 기본생성자가 자동으로 생성된다.
-    public TestClass()  // 기본생성자
-    {
-        Debug.Log("TestClass 생성자 실행");
-    }
-
-    public TestClass(int i)
-    {
-        Debug.Log($"TestClass 생성자 실행 : {i}");
-    }
-
-    public void TestPrint()
-    {
-        Debug.Log(staticNumber);
     }
 }
