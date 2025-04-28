@@ -5,21 +5,35 @@ using UnityEngine;
 
 public class HitZone : MonoBehaviour
 {
+    int perfectCount;
+    int goodCount;
+    int badCount;
+    int missCount;
+
     static HitZone instance;
 
-    public Action<HitEnum> onHit;
+    public Action<JudgeEnum> onHit;
 
     public static HitZone Instance => instance;
+    public int PerfectCount => perfectCount;
+    public int GoodCount => goodCount;
+    public int BadCount => badCount;
+    public int MissCount => missCount;
 
     void Awake()
     {
         if (instance == null)
             instance = this;
+
+        perfectCount = 0;
+        goodCount = 0;
+        badCount = 0;
+        missCount = 0;
     }
 
     public void HitNote(int index)
     {
-        LaneManager manager = GameManager.Instance.NoteManager.LaneManager;
+        LaneManager manager = NoteManager.Instance.LaneManager;
 
         List<NoteBase> list = manager[index].OnLaneNotes;
         if (list.Count > 0)
@@ -35,15 +49,24 @@ public class HitZone : MonoBehaviour
         }
     }
 
-    public HitEnum CheckTimin(float distance)
+    public JudgeEnum CheckTimin(float distance)
     {
-        HitEnum hit;
+        JudgeEnum hit;
         if (distance <= 0.25f)
-            hit = HitEnum.Perfect;
+        {
+            hit = JudgeEnum.Perfect;
+            perfectCount++;
+        }
         else if (distance <= 0.65f)
-            hit = HitEnum.Good;
+        {
+            hit = JudgeEnum.Good;
+            goodCount++;
+        }
         else
-            hit = HitEnum.Bad;
+        {
+            hit = JudgeEnum.Bad;
+            badCount++;
+        }
         return hit;
     }
 
@@ -55,5 +78,10 @@ public class HitZone : MonoBehaviour
     public void ToggleEnd(int index)
     {
 
+    }
+
+    public void CountMiss()
+    {
+        missCount++;
     }
 }

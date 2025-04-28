@@ -46,7 +46,7 @@ public class ComboManager
         hitZone = null;
     }
 
-    void OnNoteHit(HitEnum hit)
+    void OnNoteHit(JudgeEnum hit)
     {
         if ((int)hit < 2)
         {

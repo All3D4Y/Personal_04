@@ -3,19 +3,13 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     static InputManager instance;
-    Canvas canvas;
     TouchPanel[] panels;
-    ComboUI comboUI;
-    ScoreUI scoreUI;
 
     public static InputManager Instance => instance;
 
     void Awake()
     {
-        canvas = FindAnyObjectByType<Canvas>();
-        panels = canvas.GetComponentsInChildren<TouchPanel>();
-        comboUI = canvas.GetComponentInChildren<ComboUI>();
-        scoreUI = canvas.GetComponentInChildren<ScoreUI>();
+        panels = GetComponentsInChildren<TouchPanel>();
 
         if (instance == null)
             instance = this;

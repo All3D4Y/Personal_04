@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameHUDViewModel
@@ -5,8 +6,11 @@ public class GameHUDViewModel
     int score;
     int combo;
 
+    public Action<JudgeEnum> onHitNote;
+
     public int Score => score;
     public int Combo => combo;
+    
 
     public GameHUDViewModel()
     {
@@ -22,5 +26,10 @@ public class GameHUDViewModel
     public void ComboUpdate(int combo)
     {
         this.combo = combo;
+    }
+
+    public void OnHitNote(JudgeEnum hit)
+    {
+        onHitNote?.Invoke(hit);
     }
 }

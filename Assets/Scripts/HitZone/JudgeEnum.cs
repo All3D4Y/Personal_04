@@ -1,4 +1,4 @@
-public enum HitEnum
+public enum JudgeEnum
 {
     Perfect = 0,
     Good,

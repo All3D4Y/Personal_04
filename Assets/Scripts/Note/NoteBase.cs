@@ -38,7 +38,14 @@ public class NoteBase : RecycleObject
     protected virtual void Update()
     {
         if (transform.position.z <= 0.0f)
-            Attack();
+        {
+            if (!isHit)
+            {
+                Attack();
+                HitZone.Instance.CountMiss();
+                HitZone.Instance.onHit?.Invoke(JudgeEnum.Miss); 
+            }
+        }
         else
             transform.Translate(noteSpeed * Time.deltaTime * Vector3.forward);
     }

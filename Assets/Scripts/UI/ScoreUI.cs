@@ -32,7 +32,7 @@ public class ScoreUI : MonoBehaviour
 
     void Update()
     {
-        Score = UIManager.Instance.GameHUDViewModel.Score;
+        Score = HUDManager.Instance.GameHUDViewModel.Score;
 
         if (displayScore < Score - 50)
         {

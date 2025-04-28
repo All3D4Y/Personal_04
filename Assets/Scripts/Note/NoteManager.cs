@@ -48,11 +48,6 @@ public class NoteManager : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        comboManager.CleanUp();
-    }
-
     public void Initialize(MusicData musicData)
     {
         comboManager = new ComboManager();
@@ -62,6 +57,11 @@ public class NoteManager : MonoBehaviour
         noteDatas = musicData.notes;
         audioSource.resource = musicData.audioClip;
         realTimeRatio = MathF.Round(240.0f / musicData.bpm, 6);
+    }
+
+    public void CleanUp()
+    {
+        comboManager.CleanUp();
     }
 
     public void SpawnNote(NoteData noteData)
