@@ -6,7 +6,8 @@ public class Setup : PlayState
 
     public override void Enter()
     {
-
+        Initialize();
+        Manager.ChangeState<Playing>();
     }
 
     public override void Update()

@@ -7,12 +7,15 @@ public class StageLoad : PlayState
 
     public override void Enter()
     {
-        //SceneManager.LoadScene(0); 게임 씬 로드
+        FadeManager.Instance.SceneLoadWithFade(1);
     }
 
     public override void Update()
     {
-        
+        if (FadeManager.Instance.LoadingProgress >= 0.9f)
+        {
+            Manager.ChangeState<Setup>();
+        }
     }
 
     public override void Exit()
