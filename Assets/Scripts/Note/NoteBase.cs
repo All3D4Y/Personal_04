@@ -22,6 +22,7 @@ public class NoteBase : RecycleObject
             {
                 isHit = value;
                 onHit?.Invoke();
+                DisableTimer(0.1f);
             }
         } 
     }
@@ -52,7 +53,7 @@ public class NoteBase : RecycleObject
     protected override void OnReset()
     {
         isHit = false;
-        DisableTimer(20.0f);
+        DisableTimer(8.0f);
     }
 
     public virtual void Attack()

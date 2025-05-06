@@ -32,19 +32,22 @@ public class ScoreUI : MonoBehaviour
 
     void Update()
     {
-        Score = HUDManager.Instance.GameHUDViewModel.Score;
+        if (HUDManager.Instance.IsInitialized)
+        {
+            Score = HUDManager.Instance.GameHUDViewModel.Score;
 
-        if (displayScore < Score - 50)
-        {
-            int speed = Mathf.Max((Score - displayScore) * scoreUpSpeed, scoreUpMinSpeed);
-            displayScore += (int)(Time.deltaTime * speed);
-            displayScore = Mathf.Min(displayScore, Score);
-            ShowScore();
-        }
-        else if (displayScore < Score)
-        {
-            displayScore = Score;
-            ShowScore();
+            if (displayScore < Score - 50)
+            {
+                int speed = Mathf.Max((Score - displayScore) * scoreUpSpeed, scoreUpMinSpeed);
+                displayScore += (int)(Time.deltaTime * speed);
+                displayScore = Mathf.Min(displayScore, Score);
+                ShowScore();
+            }
+            else if (displayScore < Score)
+            {
+                displayScore = Score;
+                ShowScore();
+            } 
         }
     }
 

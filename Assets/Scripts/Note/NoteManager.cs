@@ -16,6 +16,9 @@ public class NoteManager : MonoBehaviour
     int currentIndex = 0;
     float currentTime;
     float realTimeRatio;
+    bool isEnd = false;
+
+    public Action<bool> onStageEnd;
 
     public static NoteManager Instance => instance;
     public LaneManager LaneManager => laneManager;
@@ -33,18 +36,19 @@ public class NoteManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (audioSource != null)
+        if (audioSource != null && audioSource.isPlaying)
         {
             currentTime = audioSource.time;
-
-            if (audioSource.isPlaying)
+            if (currentIndex < noteDatas.Count && (noteDatas[currentIndex].barTime * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
             {
-                if (currentIndex < noteDatas.Count && (noteDatas[currentIndex].barTime * realTimeRatio) + currentMusicData.syncModifier <= currentTime)
-                {
-                    SpawnNote(noteDatas[currentIndex]);
-                    currentIndex++;
-                }
-            } 
+                SpawnNote(noteDatas[currentIndex]);
+                currentIndex++;
+            }
+        }
+        if (audioSource.time >= audioSource.clip.length && !audioSource.isPlaying && !isEnd)
+        {
+            isEnd = true;
+            onStageEnd?.Invoke(true);
         }
     }
 
@@ -57,6 +61,7 @@ public class NoteManager : MonoBehaviour
         noteDatas = musicData.notes;
         audioSource.resource = musicData.audioClip;
         realTimeRatio = MathF.Round(240.0f / musicData.bpm, 6);
+        isEnd = false;
     }
 
     public void CleanUp()

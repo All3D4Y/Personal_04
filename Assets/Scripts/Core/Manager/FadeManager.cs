@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,7 @@ public class FadeManager : Singleton<FadeManager>
 
     float loadingProgress;
 
-    public float LoadingProgress => loadingProgress;
+    public Action onLoadComplete;
 
     void Update()
     {
@@ -40,6 +41,7 @@ public class FadeManager : Singleton<FadeManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartFadeOut();
+        onLoadComplete?.Invoke();
     }
 
     void ShowNumber(float number)

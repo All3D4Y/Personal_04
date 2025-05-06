@@ -23,7 +23,10 @@ public class ComboUI : MonoBehaviour
 
     void Update()
     {
-        ShowCombo(HUDManager.Instance.GameHUDViewModel.Combo);
+        if (HUDManager.Instance.IsInitialized)
+        {
+            ShowCombo(HUDManager.Instance.GameHUDViewModel.Combo); 
+        }
     }
 
     public void ShowCombo(int comboCount)

@@ -22,11 +22,11 @@ public class Setup : PlayState
 
     void Initialize()
     {
+        // 노트매니저(음악) 초기화
+        NoteManager.Instance.Initialize(MusicManager.Instance.MusicData);
         // 인풋초기화
         InputManager.Instance.Initialize();
         // UI 초기화
         HUDManager.Instance.Initialize();
-        // 노트매니저(음악) 초기화
-        NoteManager.Instance.Initialize(MusicManager.Instance.MusicData);
     }
 }

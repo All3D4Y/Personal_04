@@ -9,6 +9,7 @@ public class HUDManager : MonoBehaviour
 
     public static HUDManager Instance => instance;
     public GameHUDViewModel GameHUDViewModel => gameHUDViewModel;
+    public bool IsInitialized { get; private set; }
 
     void Awake()
     {
@@ -29,6 +30,8 @@ public class HUDManager : MonoBehaviour
 
         // 초기화
         judgeUI.Initialize();
+
+        IsInitialized = true;
     }
 
     public void CleanUp()
