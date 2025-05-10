@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fa5693370927c49946a17e6a8ffc89, type: 3}
+  m_Name: TestMusicDataBase
+  m_EditorClassIdentifier: 
+  musicList:
+  - coverImage: {fileID: -1776440199, guid: 221c78a4dfd226a4a9766eb66cd8741b, type: 3}
+    title: Donuts
+    artist: 2SCOOPS
+    difficulty: 3
+    musicDataAddress: music/TestTrack_00
+  - coverImage: {fileID: -364977478, guid: 71e543a9a2f9cb24e8339580c7863dd1, type: 3}
+    title: 2:23 AM
+    artist: Sharou
+    difficulty: 3
+    musicDataAddress: music/TestTrack_00
+  - coverImage: {fileID: -1227286069, guid: 4c4fce0a595ee0940a1ef14106416fb8, type: 3}
+    title: SHUWASHUWA Honey Lemon 350ml
+    artist: Sharou
+    difficulty: 3
+    musicDataAddress: music/TestTrack_00

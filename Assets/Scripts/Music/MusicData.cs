@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(fileName = "NewMusicData", menuName = "Scriptable Objects/MusicData")]
 public class MusicData : ScriptableObject

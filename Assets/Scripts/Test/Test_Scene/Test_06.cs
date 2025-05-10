@@ -3,15 +3,15 @@ using UnityEngine.InputSystem;
 
 public class Test_06 : TestBase
 {
-    public MusicData data;
+    public MusicPanelManager manager;
 
     protected override void OnTest1(InputAction.CallbackContext context)
     {
-        MusicManager.Instance.SetData(data);
+        manager.Initialize();
     }
 
     protected override void OnTest2(InputAction.CallbackContext context)
     {
-        GameFlowManager.Instance.FlowStart();
+        
     }
 }

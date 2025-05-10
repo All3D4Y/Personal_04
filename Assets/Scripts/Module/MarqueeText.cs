@@ -33,7 +33,7 @@ public class MarqueeText : MonoBehaviour
         yield return null; // Layout이 완전히 계산될 때까지 대기
 
         float containerWidth = containerRect.rect.width;
-        float textWidth = movingText.preferredWidth;
+        float textWidth = movingText.preferredWidth + 100.0f;
 
         if (textWidth <= containerWidth)
         {
