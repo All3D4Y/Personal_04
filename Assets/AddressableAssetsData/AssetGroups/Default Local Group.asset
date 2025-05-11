@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: c9f052510e75dc84eb7b1c6aefbc2f31
   m_SerializeEntries:
+  - m_GUID: 1ec63abdb8bc9c344807467badc8df0f
+    m_Address: music/223am
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 688c2b637484c1848803c99f34aaeb24
+    m_Address: music/350ml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 788fea994881d3f45a69c7ace9781994
-    m_Address: music/TestTrack_00
+    m_Address: music/Donut
     m_ReadOnly: 0
     m_SerializedLabels:
     - MusicData

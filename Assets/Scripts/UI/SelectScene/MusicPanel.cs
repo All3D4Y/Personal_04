@@ -46,7 +46,7 @@ public class MusicPanel : MonoBehaviour
 
     void OnPanelClick()
     {
-        throw new NotImplementedException();
+        Debug.LogWarning("버튼 기능 할당 필요!");
     }
 
     void OnDestroy()

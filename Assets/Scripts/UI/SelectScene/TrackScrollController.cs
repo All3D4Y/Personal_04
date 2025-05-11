@@ -1,145 +1,154 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.EventSystems;
+
 
 public class TrackScrollController : MonoBehaviour
 {
-    [Header("Scroll View Components")]
-    public ScrollRect scrollRect;
-    public RectTransform content;
-    public RectTransform viewport;
+    [Header("References")]
+    public ScrollRect scrollRect;               
+    public RectTransform content;         
+    public HorizontalLayoutGroup horizontalLayoutGroup;
 
-    [Header("Snap Settings")]
-    public float snapDelay = 0.3f;
-    public float snapSpeed = 10f;
+    [Header("Snapping Settings")]
+    public float snapSpeed = 10f;               
+    public float velocityThreshold = 100f;      
 
-    float scrollVelocityThreshold = 10f;
+    [Header("Preview Settings")]
+    public float previewLoopDelay = 1f;
 
     AudioSource previewSource;
-    MusicPanel currentSelectedItem;
+    int itemCount;
+    int currentIndex = 0;
+    int previewIndex = -1;
+    float itemWidth = 0f;               
+    float currentSnapSpeed;
+    bool isSnapped;
+    bool isBtnClicked;
 
     Coroutine snapCoroutine;
-    Coroutine previewLoopCoroutine;
-    AsyncOperationHandle<MusicData>? currentPreviewHandle;
+    Coroutine previewCoroutine;
+    AsyncOperationHandle<MusicData>? currentHandle;
 
     void Awake()
     {
         previewSource = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        // 패널의 폭, 패널 개수
+        if (content.childCount != 0)
+        {
+            var item = content.GetChild(0) as RectTransform;
+            itemWidth = item.rect.width;
+            itemCount = content.childCount;
+        }
+    }
+
     void Update()
     {
-        if (scrollRect.velocity.magnitude < scrollVelocityThreshold)
+        if (!isBtnClicked)
         {
-            if (snapCoroutine == null)
-                snapCoroutine = StartCoroutine(SnapToClosestTrackCoroutine());
+            currentIndex = Mathf.RoundToInt(0 - content.localPosition.x / (itemWidth + horizontalLayoutGroup.spacing));
+
+            if (scrollRect.velocity.magnitude < velocityThreshold && !isSnapped)
+            {
+                scrollRect.velocity = Vector3.zero;
+                currentSnapSpeed += snapSpeed * Time.deltaTime;
+                content.localPosition = new Vector3(
+                    Mathf.MoveTowards(content.localPosition.x, 0 - currentIndex * (itemWidth + horizontalLayoutGroup.spacing), currentSnapSpeed),
+                    content.localPosition.y,
+                    content.localPosition.z);
+                if (content.localPosition.x == 0 - currentIndex * (itemWidth + horizontalLayoutGroup.spacing))
+                {
+                    isSnapped = true;
+                    LoadPreviewForIndex(currentIndex);
+                }
+            }
+            if (scrollRect.velocity.magnitude > velocityThreshold)
+            {
+                isSnapped = false;
+                currentSnapSpeed = 0;
+            } 
         }
-        else
+    }
+
+    public void MoveTrack(int direction)
+    {
+        int newIndex = currentIndex + direction;
+        if (newIndex > -1 || newIndex < itemCount)
         {
+            isBtnClicked = true;
             if (snapCoroutine != null)
-            {
                 StopCoroutine(snapCoroutine);
-                snapCoroutine = null;
-            }
+            snapCoroutine = StartCoroutine(MoveSmooth(direction)); 
+            currentIndex = newIndex;
         }
     }
 
-    IEnumerator SnapToClosestTrackCoroutine()
+
+    void LoadPreviewForIndex(int index)
     {
-        yield return new WaitForSeconds(snapDelay);
-
-        Transform closest = null;
-        float closestDistance = float.MaxValue;
-        Vector3 centerInWorld = viewport.TransformPoint(viewport.rect.center);
-
-        foreach (Transform child in content)
+        if (previewIndex != index)
         {
-            float distance = Mathf.Abs(child.position.x - centerInWorld.x);
-            if (distance < closestDistance)
+            previewIndex = index;
+
+            if (previewCoroutine != null)
+                StopCoroutine(previewCoroutine);
+
+            previewSource.Stop();
+
+            if (currentHandle.HasValue)
             {
-                closest = child;
-                closestDistance = distance;
+                Addressables.Release(currentHandle.Value);
+                currentHandle = null;
             }
-        }
 
-        if (closest != null)
-        {
-            Vector2 diff = (Vector2)(viewport.position - closest.position);
-            Vector2 targetPos = content.localPosition + (Vector3)diff;
+            var item = content.GetChild(currentIndex).GetComponent<MusicPanel>();
+            if (item == null) return;
 
-            yield return StartCoroutine(SmoothMove(content.localPosition, targetPos, 0.25f));
+            var handle = Addressables.LoadAssetAsync<MusicData>(item.MusicMetaData.musicDataAddress);
+            currentHandle = handle;
 
-            MusicPanel newSelected = closest.GetComponent<MusicPanel>();
-            if (newSelected != null && newSelected != currentSelectedItem)
+            handle.Completed += op =>
             {
-                currentSelectedItem = newSelected;
-                PlayPreview(currentSelectedItem.MusicMetaData);
-            }
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    MusicData data = op.Result;
+                    previewSource.clip = data.audioClip;
+                    previewCoroutine = StartCoroutine(LoopPreview(data));
+                }
+            }; 
         }
-
-        snapCoroutine = null;
     }
 
-    IEnumerator SmoothMove(Vector2 from, Vector2 to, float duration)
-    {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            content.localPosition = Vector2.Lerp(from, to, elapsed / duration);
-            yield return null;
-        }
-        content.localPosition = to;
-    }
-
-    void PlayPreview(MusicMetaData meta)
-    {
-        // 재생 중이던 프리뷰 정리
-        previewSource.Stop();
-
-        if (previewLoopCoroutine != null)
-        {
-            StopCoroutine(previewLoopCoroutine);
-            previewLoopCoroutine = null;
-        }
-
-        // 핸들 릴리즈
-        if (currentPreviewHandle.HasValue)
-        {
-            Addressables.Release(currentPreviewHandle.Value);
-            currentPreviewHandle = null;
-        }
-
-        // 데이터 로드
-        var handle = Addressables.LoadAssetAsync<MusicData>(meta.musicDataAddress);
-        currentPreviewHandle = handle;
-
-        handle.Completed += op =>
-        {
-            if (op.Status == AsyncOperationStatus.Succeeded)
-            {
-                MusicData musicData = op.Result;
-                previewSource.clip = musicData.audioClip;
-                previewLoopCoroutine = StartCoroutine(LoopPreview(musicData));
-            }
-        };
-    }
-    IEnumerator LoopPreview(MusicData musicData)
+    IEnumerator LoopPreview(MusicData data)
     {
         while (true)
         {
             previewSource.Stop();
-            previewSource.time = Mathf.Clamp(musicData.previewStartTime, 0f, musicData.audioClip.length);
+            previewSource.time = Mathf.Clamp(data.previewStartTime, 0f, data.audioClip.length);
             previewSource.Play();
-
-            yield return new WaitForSecondsRealtime(musicData.previewLength);
-
+            yield return new WaitForSecondsRealtime(data.previewLength);
             previewSource.Stop();
-            yield return new WaitForSecondsRealtime(1.0f); // 루프 사이 잠깐 멈춤
+            yield return new WaitForSecondsRealtime(previewLoopDelay);
         }
+    }
+
+    IEnumerator MoveSmooth(int direction)
+    {
+        float distance = 0;
+        while (distance <= itemWidth + horizontalLayoutGroup.spacing)
+        {
+            distance += snapSpeed * Time.deltaTime;
+            content.localPosition = new Vector3(direction, content.localPosition.y, content.localPosition.z);
+            yield return null;
+        }
+        isBtnClicked = false;
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SHUWASHUWA_HoneyLemon_350ml
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 5a1a038b50cfe984399df6836637bf03, type: 3}
-  bpm: 0
+  bpm: 125
   syncModifier: 0
   notes: []
+  previewStartTime: 61
+  previewLength: 17

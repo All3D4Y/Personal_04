@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: bf9f5f8dc12a9de4db18d407724f3066, type: 3}
   bpm: 150
-  difficulty: 0
   syncModifier: 0.2
   notes:
   - height: 1
@@ -77,3 +76,5 @@ MonoBehaviour:
   - height: 0
     barTime: 9.5
     side: 0
+  previewStartTime: 38
+  previewLength: 26

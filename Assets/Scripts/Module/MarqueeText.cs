@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Mask))]
+[RequireComponent(typeof(RectMask2D))]
 public class MarqueeText : MonoBehaviour
 {
     public TextMeshProUGUI movingText;

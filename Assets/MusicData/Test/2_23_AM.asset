@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7194e76f39a5841b89f6f39b013b3e, type: 3}
   m_Name: 2_23_AM
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
-  bpm: 0
+  audioClip: {fileID: 8300000, guid: 7ce7baccda9b0cd47b5667c3f15cbecf, type: 3}
+  bpm: 90
   syncModifier: 0
   notes: []
+  previewStartTime: 11
+  previewLength: 32
