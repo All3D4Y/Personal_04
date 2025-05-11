@@ -6,6 +6,9 @@ public class MusicPanelManager : MonoBehaviour
     public GameObject musicPanel;
 
     Transform panelParent;
+    MusicPanel[] musicPanels;
+    
+    public MusicPanel[] MusicPanels => musicPanels;
 
     void Awake()
     {
@@ -15,10 +18,12 @@ public class MusicPanelManager : MonoBehaviour
     public void Initialize()
     {
         int count = musicDataBase.musicList.Count;
+        musicPanels = new MusicPanel[count];
         for (int i = 0; i < count; i++)
         {
             MusicPanel panel = GameObject.Instantiate(musicPanel, panelParent).GetComponent<MusicPanel>();
             panel.Initialize(musicDataBase.musicList[i]);
+            musicPanels[i] = panel;
         }
     }
 }

@@ -15,4 +15,7 @@ public class MusicData : ScriptableObject
     [Space(2)]
     [Header("Note")]
     public List<NoteData> notes;
+    [Header("Preview")]
+    public float previewStartTime;
+    public float previewLength;
 }

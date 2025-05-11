@@ -12,6 +12,8 @@ public class MusicPanel : MonoBehaviour
     TextMeshProUGUI musicName;
     TextMeshProUGUI bestScore;
 
+    public MusicMetaData MusicMetaData => musicMetaData;
+
     void Awake()
     {
         button = GetComponent<Button>();
