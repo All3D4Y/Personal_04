@@ -28,3 +28,8 @@ MonoBehaviour:
     artist: Sharou
     difficulty: 3
     musicDataAddress: music/350ml
+  - coverImage: {fileID: 1196570984, guid: 4ecbb7f91cf909640a966d7ebce924ef, type: 3}
+    title: Retrospective
+    artist: Alex Skrindo, JJD
+    difficulty: 3
+    musicDataAddress: music/Retrospective

@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - MusicData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa814c6796d4e954a965d1d38ac74505
+    m_Address: music/Retrospective
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicData
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f87ac6367ed324844bdbe4fef4e9d59c, type: 2}
   m_SchemaSet:
