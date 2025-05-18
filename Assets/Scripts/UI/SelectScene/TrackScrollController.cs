@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.EventSystems;
 
 
 public class TrackScrollController : MonoBehaviour
@@ -41,7 +39,7 @@ public class TrackScrollController : MonoBehaviour
 
     void Start()
     {
-        // 패널의 폭, 패널 개수
+        // item의 폭, item 개수
         if (content.childCount != 0)
         {
             var item = content.GetChild(0) as RectTransform;
