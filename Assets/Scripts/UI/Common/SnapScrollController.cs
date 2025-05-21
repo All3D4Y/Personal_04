@@ -10,8 +10,8 @@ public class SnapScrollController : MonoBehaviour
     public HorizontalLayoutGroup horizontalLayoutGroup;
 
     [Header("Snapping Settings")]
-    public float snapSpeed = 10f;
-    public float velocityThreshold = 100f;
+    public float snapSpeed = 100f;
+    public float velocityThreshold = 300f;
 
     protected AudioSource previewSource;
     protected int itemCount;
