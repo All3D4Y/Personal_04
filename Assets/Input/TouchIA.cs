@@ -92,24 +92,24 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
             ""id"": ""bebe2dbe-ee70-4ef7-a506-5bcb80901b01"",
             ""actions"": [
                 {
-                    ""name"": ""Swipe"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""82991cc2-1fb9-49ea-b848-84317f719766"",
+                    ""name"": ""Touch"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d4b2305-a9af-4ee1-b14d-4e42da74ae11"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""f0a16224-97df-4542-b007-f7e093f8977b"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""id"": ""8d907830-7e4f-42e5-a945-6b75794a9311"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Swipe"",
+                    ""action"": ""Touch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -137,7 +137,7 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
 }");
         // Touch
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
-        m_Touch_Swipe = m_Touch.FindAction("Swipe", throwIfNotFound: true);
+        m_Touch_Touch = m_Touch.FindAction("Touch", throwIfNotFound: true);
     }
 
     ~@TouchIA()
@@ -218,7 +218,7 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
     // Touch
     private readonly InputActionMap m_Touch;
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
-    private readonly InputAction m_Touch_Swipe;
+    private readonly InputAction m_Touch_Touch;
     /// <summary>
     /// Provides access to input actions defined in input action map "Touch".
     /// </summary>
@@ -231,9 +231,9 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
         /// </summary>
         public TouchActions(@TouchIA wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Touch/Swipe".
+        /// Provides access to the underlying input action "Touch/Touch".
         /// </summary>
-        public InputAction @Swipe => m_Wrapper.m_Touch_Swipe;
+        public InputAction @Touch => m_Wrapper.m_Touch_Touch;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -260,9 +260,9 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_TouchActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TouchActionsCallbackInterfaces.Add(instance);
-            @Swipe.started += instance.OnSwipe;
-            @Swipe.performed += instance.OnSwipe;
-            @Swipe.canceled += instance.OnSwipe;
+            @Touch.started += instance.OnTouch;
+            @Touch.performed += instance.OnTouch;
+            @Touch.canceled += instance.OnTouch;
         }
 
         /// <summary>
@@ -274,9 +274,9 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
         /// <seealso cref="TouchActions" />
         private void UnregisterCallbacks(ITouchActions instance)
         {
-            @Swipe.started -= instance.OnSwipe;
-            @Swipe.performed -= instance.OnSwipe;
-            @Swipe.canceled -= instance.OnSwipe;
+            @Touch.started -= instance.OnTouch;
+            @Touch.performed -= instance.OnTouch;
+            @Touch.canceled -= instance.OnTouch;
         }
 
         /// <summary>
@@ -331,11 +331,11 @@ public partial class @TouchIA: IInputActionCollection2, IDisposable
     public interface ITouchActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Swipe" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Touch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSwipe(InputAction.CallbackContext context);
+        void OnTouch(InputAction.CallbackContext context);
     }
 }

@@ -6,24 +6,24 @@
             "id": "bebe2dbe-ee70-4ef7-a506-5bcb80901b01",
             "actions": [
                 {
-                    "name": "Swipe",
-                    "type": "PassThrough",
-                    "id": "82991cc2-1fb9-49ea-b848-84317f719766",
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "9d4b2305-a9af-4ee1-b14d-4e42da74ae11",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "f0a16224-97df-4542-b007-f7e093f8977b",
-                    "path": "<Touchscreen>/primaryTouch/position",
+                    "id": "8d907830-7e4f-42e5-a945-6b75794a9311",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swipe",
+                    "action": "Touch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
