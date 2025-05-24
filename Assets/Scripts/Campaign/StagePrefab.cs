@@ -6,6 +6,7 @@ public class StagePrefab : MonoBehaviour
     public Material normal;
     public GameObject monsterPrefab;
     [SerializeField] int stageIndex;
+    public StageData stageData;
 
     MeshRenderer platformRenderer;
 

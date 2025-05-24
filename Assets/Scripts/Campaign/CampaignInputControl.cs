@@ -3,13 +3,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class Test_TouchIA : MonoBehaviour
+public class CampaignInputControl : MonoBehaviour
 {
     public Camera mainCamera;
 
     public Action<Transform> onTouch;
 
+    static CampaignInputControl instance;
+
     IDisposable touchSubscription;
+
+    public static CampaignInputControl Instance => instance;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     void OnEnable()
     {
@@ -31,7 +41,7 @@ public class Test_TouchIA : MonoBehaviour
         }
         else
         {
-            return; // 입력 없음
+            return;
         }
 
 
@@ -51,7 +61,6 @@ public class Test_TouchIA : MonoBehaviour
 
     void OnBillboardTouched(Transform billboard)
     {
-        Debug.Log("Touch");
         StagePrefab stage = billboard.parent.parent.GetComponent<StagePrefab>();
         // stage.stageData 스테이지 데이터 매니저에 저장하기
         onTouch?.Invoke(stage.transform);
