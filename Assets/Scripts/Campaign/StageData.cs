@@ -4,4 +4,6 @@ using UnityEngine;
 public class StageData : ScriptableObject
 {
     public string musicDataAddress;
+    public GameObject environment;
+    public GameObject bossMonster;
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CampaignCharacterControl : MonoBehaviour
 {
     public float moveSpeed = 1.0f;
+    public float waitTime = 1.0f;
 
     Animator animator;
 
@@ -34,19 +35,17 @@ public class CampaignCharacterControl : MonoBehaviour
     IEnumerator MoveCoroutine(Transform target)
     {
         Vector3 targetPos = target.position;
-        Debug.Log($"{targetPos}");
-        Debug.Log($"{Vector3.SqrMagnitude(targetPos - transform.position)}");
+
         if (Vector3.SqrMagnitude(targetPos - transform.position) > 1.0f)
             animator.SetBool("IsRun", true);
 
-        while (Vector3.SqrMagnitude(targetPos - transform.position) <= 1.0f)
+        while (Vector3.SqrMagnitude(targetPos - transform.position) > 1.0f)
         {
-            Debug.Log($"{Vector3.SqrMagnitude(targetPos - transform.position)}");
             transform.position += moveSpeed * Time.deltaTime * (targetPos - transform.position).normalized;
             yield return null;
         }
         animator.SetBool("IsRun", false);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(waitTime);
 
         LoadStage(target.GetComponent<StagePrefab>().stageData);
     }
