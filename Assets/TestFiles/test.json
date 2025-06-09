@@ -1,0 +1,14 @@
+{
+  "dialogues": [
+    {
+      "id": "intro_001",
+      "English": "Hello",
+      "Korean": "안녕하세요"
+    },
+    {
+      "id": "intro_002",
+      "English": "Nice to meet you",
+      "Korean": "반가워요"
+    }
+  ]
+}

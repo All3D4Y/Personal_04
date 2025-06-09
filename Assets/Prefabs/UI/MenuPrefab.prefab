@@ -261,8 +261,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Test Menu Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 614447c53147f9a4bbc247778938934e, type: 2}
-  m_sharedMaterial: {fileID: -1438714626733550278, guid: 614447c53147f9a4bbc247778938934e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fd46622223dfaf2468f0956d46ce3335, type: 2}
+  m_sharedMaterial: {fileID: 2864186148890364344, guid: fd46622223dfaf2468f0956d46ce3335, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_fontSizeMin: 50
   m_fontSizeMax: 100
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
